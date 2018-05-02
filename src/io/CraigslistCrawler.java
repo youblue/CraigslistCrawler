@@ -23,6 +23,7 @@ import org.jsoup.select.Elements;
 public class CraigslistCrawler {
     private static final String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36";
     private static String proxy_file = "./proxylist_bittiger.csv";
+    private static String log_file = "./log_out.txt";
 
     private static final String authUser = "bittiger";
     private static final String authPassword = "cs504";
@@ -45,6 +46,7 @@ public class CraigslistCrawler {
 
         initProxyList(proxy_file);
         setProxy();
+        initLog(log_file);
 
         // Start crawling
         HashMap<String,String> headers = new HashMap<String,String>();
@@ -94,6 +96,18 @@ public class CraigslistCrawler {
             System.out.println(rentPriceList.get(i));
             System.out.println(hoodList.get(i));
             System.out.println("\n");
+
+
+            logBFWriter.write("===========  " + Integer.toString(i+1) + ":");
+            logBFWriter.newLine();
+            logBFWriter.write(titleList.get(i));
+            logBFWriter.newLine();
+            logBFWriter.write(detailUrlList.get(i));
+            logBFWriter.newLine();
+            logBFWriter.write(rentPriceList.get(i));
+            logBFWriter.newLine();
+            logBFWriter.write(hoodList.get(i));
+            logBFWriter.newLine();
         }
 
 
@@ -138,5 +152,22 @@ public class CraigslistCrawler {
         System.setProperty("socksProxyHost", proxy); // set proxy server
         index++;
     }
+
+    private static void initLog(String log_path) {
+        try {
+            File log = new File(log_path);
+            // if file doesnt exists, then create it
+            if (!log.exists()) {
+                log.createNewFile();
+            }
+            FileWriter fw = new FileWriter(log.getAbsoluteFile());
+            logBFWriter = new BufferedWriter(fw);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
