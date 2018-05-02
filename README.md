@@ -1,13 +1,9 @@
 # CraigslistCrawler
 
-### Problem: collect all renting information on this page:
+### Problem: collect all renting information on this page (Page 1 only):
   https://sfbay.craigslist.org/d/apts-housing-for-rent/search/apa
   
-  (Here I assume page means "Page 1", so this page contains 120 records that need collection.)
-  
-* The renting information include:
-
-title/rent price/detail url/hood/
+  including: title/rent price/detail url/hood/
 
 * Example:
   
@@ -19,8 +15,6 @@ title/rent price/detail url/hood/
   
   (san jose south)
   
-  * If some fields don’t exist, use NULL instead.
-
 ### Input/Output data
 * Input: given URL ("https://sfbay.craigslist.org/d/apts-housing-for-rent/search/apa".)
 * Output: display the complete result on console, also stored parts of results in log file named "log_out.txt".
